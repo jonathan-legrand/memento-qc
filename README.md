@@ -16,7 +16,7 @@ The logic of QC is that all the scripts starting by 3 are
 able to detect bad scans. The ones that cannot be repaired
 are excluded from the preprocessing using the renamer 
 script, which takes a csv file containing the subject and session
-columns as an input and adds the `acq-rejected` flag to their bids name. These scans are then filtered out using bids [filter files](https://fmriprep.org/en/24.0.1/faq.html#how-do-i-select-only-certain-files-to-be-input-to-fmriprep) when calling fMRIprep.
+columns as an input and adds the `acq-rejected` flag to their bids name. These scans are then filtered out using bids [filter files](https://fmriprep.org/en/24.0.1/faq.html#how-do-i-select-only-certain-files-to-be-input-to-fmriprep) when calling fMRIprep. In case you want to revert a name change, `4_rerename.py`is here for you.
 
 The document `IRMf dans Memento - rapport d'avancement.pdf`
 reports the choices that have been made regarding which scans
