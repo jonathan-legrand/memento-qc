@@ -14,7 +14,6 @@ import seaborn as sns
 
 from mappings.fnames import BOLD_FNAMES, ALL_BOLD_FNAMES, ALL_T1_FNAMES
 from utils.file_matcher import recursive_file_matcher
-from utils.visualisation import make_and_show_middle_slices
 from utils.sequence_report import sequence_report, sequence_report_with_units
 from utils.memento_structure import extract_info
 
