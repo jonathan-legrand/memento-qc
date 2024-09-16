@@ -160,13 +160,30 @@ if __name__ == "__main__":
         os.mkdir(bids_path / "code")
         os.mkdir(bids_path / "sourcedata")
         open(bids_path / "CHANGES", "w").close()
-        open(bids_path / "dataset_description.json", "w").close()
-        open(bids_path / "participants.json", "w").close()
+        
+        with open(bids_path / "dataset_description.json", "w") as fp:
+            json.dump(
+                {
+                    "Name": "Memento",
+                    "BIDSVersion": "1.10.0"
+                },
+                fp
+            )
+
+        with open(bids_path / "participants.json", "w") as fp:
+            json.dump(
+                {
+                    "centre": 
+                        {
+                            "Description": "Anonymous code of examination centre which provided this participants's data",
+                        }
+                },
+                fp
+            )
         open(bids_path / "participants.tsv", "w").close()
         open(bids_path / "README", "w").close()
         open(bids_path / ".bidsignore", "w").close()
 
     t1w_to_bids(input_path, bids_path)
     bold_to_bids(input_path, bids_path)
-
 
