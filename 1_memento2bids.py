@@ -29,7 +29,6 @@ def memento_to_bids(
     input_path: Path, 
     bids_path: Path,
     modality: Modality,
-    overwrite_participants: bool = False
     ):
     """
     Bidsifies the content of the input_dir,
@@ -43,9 +42,6 @@ def memento_to_bids(
 
     
     gen = recursive_file_matcher(input_path, modality.memento_name)
-    if overwrite_participants:
-        with open(bids_path / "participants.tsv", "w") as f:
-            f.write("participant_id\tcentre\n")
 
     for fpath in gen:
 
@@ -106,7 +102,7 @@ def t1w_to_bids(inp, outp):
             "anat",
             "T1w"
         )
-        memento_to_bids(inp, outp, t1, overwrite_participants=False)
+        memento_to_bids(inp, outp, t1)
 
 def bold_to_bids(inp, outp):
     from mappings.fnames import ALL_BOLD_FNAMES
@@ -119,7 +115,7 @@ def bold_to_bids(inp, outp):
             "task-rest_bold",
             sidecar=bold_sidecar
         )
-        memento_to_bids(inp, outp, rsfmri, overwrite_participants=False)
+        memento_to_bids(inp, outp, rsfmri)
         
 def init_argparse() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -180,7 +176,10 @@ if __name__ == "__main__":
                 },
                 fp
             )
-        open(bids_path / "participants.tsv", "w").close()
+
+        with open(bids_path / "participants.tsv", "w") as f:
+            f.write("participant_id\tcentre\n")
+
         open(bids_path / "README", "w").close()
         open(bids_path / ".bidsignore", "w").close()
 
