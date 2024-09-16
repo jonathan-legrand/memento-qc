@@ -106,7 +106,7 @@ def t1w_to_bids(inp, outp):
             "anat",
             "T1w"
         )
-        memento_to_bids(inp, outp, t1, overwrite_participants=True)
+        memento_to_bids(inp, outp, t1, overwrite_participants=False)
 
 def bold_to_bids(inp, outp):
     from mappings.fnames import ALL_BOLD_FNAMES
@@ -125,7 +125,13 @@ def init_argparse() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="""
         Convert existing datadir using Memento convention into
-        BIDS format. Only supports T1w and resting state bold modalities for now.
+        BIDS format. 
+        Only supports T1w and resting state bold modalities for now.
+        If target dir already contains some imaging files, these are not
+        overwritten.
+        Duplicates are not allowed. If there are several files for the
+        same subject and the same session, only one file is kept. Priority
+        is defined in the ALL_{modality}_FNAMES mapping.
         """
     )
     parser.add_argument(
