@@ -4,25 +4,18 @@ which should use the memento weird convention,
 and put it in the BIDS_DIR.
 """
 
-
-# %%
 import nibabel as nib
 from pathlib import Path
 import os
 import json
 import warnings
+import argparse
 
 from mappings.sidecar import bold_sidecar
 from utils.file_matcher import recursive_file_matcher
 from utils.memento_structure import extract_info
 from gzip import BadGzipFile
 
-
-#INPUT_DIR = "/georges/memento/IRM"
-INPUT_DIR = "/scratch/memento_sample"
-#BIDS_DIR = "/georges/memento/BIDS"
-BIDS_DIR = "/scratch/memento_sample_bids"
-# %%
 
 class Modality:
     def __init__(self, memento_fnames, bids_modality, bids_suffix, sidecar=None):
@@ -102,9 +95,7 @@ def memento_to_bids(
         print(site, bids_fname)
 
 
-
-
-# %% These could be abstracted further but let's be explicit
+# These could be abstracted further but let's be explicit
 def t1w_to_bids(inp, outp):
     from mappings.fnames import ALL_T1_FNAMES
     print("Order of matching :")
@@ -130,11 +121,45 @@ def bold_to_bids(inp, outp):
         )
         memento_to_bids(inp, outp, rsfmri, overwrite_participants=False)
         
+def init_argparse() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="""
+        Convert existing datadir using Memento convention into
+        BIDS format. Only supports T1w and resting state bold modalities for now.
+        """
+    )
+    parser.add_argument(
+        "input_dir",
+        help="Path of the input directory containing scans in Memento format."
+    )
+    parser.add_argument(
+        "output_dir",
+        help="""
+        Path of the output BIDS directory. Directory is created with
+        empty BIDS files if it does not exist.
+        """
+    )
+    return parser
+
 if __name__ == "__main__":
-    input_path = Path(INPUT_DIR)
-    bids_path = Path(BIDS_DIR)
+    parser = init_argparse()
+    args = parser.parse_args()
+    input_path = Path(args.input_dir)
+    bids_path = Path(args.output_dir)
+    
     if not os.path.exists(bids_path):
+        print(f"Creating BIDS directory and strucure in {bids_path}")
         os.mkdir(bids_path)
+        os.mkdir(bids_path / "derivatives")
+        os.mkdir(bids_path / "code")
+        os.mkdir(bids_path / "sourcedata")
+        open(bids_path / "CHANGES", "w").close()
+        open(bids_path / "dataset_description.json", "w").close()
+        open(bids_path / "participants.json", "w").close()
+        open(bids_path / "participants.tsv", "w").close()
+        open(bids_path / "README", "w").close()
+        open(bids_path / ".bidsignore", "w").close()
+
     t1w_to_bids(input_path, bids_path)
     bold_to_bids(input_path, bids_path)
 
