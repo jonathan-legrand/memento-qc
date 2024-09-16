@@ -2,5 +2,5 @@
 /dataset_cache
 *nilearn_cache*
 __pycache__
-/output
+/output*
 /pybids*
