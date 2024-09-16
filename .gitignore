@@ -3,3 +3,4 @@
 *nilearn_cache*
 __pycache__
 /output
+/pybids
