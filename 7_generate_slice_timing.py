@@ -1,3 +1,7 @@
+"""
+Using slice timing information inferred in 6, we generate sidecars
+and store them where needed.
+"""
 # %%
 import nibabel as nib
 import pandas as pd
