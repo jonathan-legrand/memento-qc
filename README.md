@@ -12,6 +12,9 @@ jupyter-like cells, hence the `# %%` tags.
 Scripts starting with 1, 2, 4 and 7 are able to write to BIDS directory,
 make sure you understand what they do before executing them.
 
+To get started, create a conda environment with proper dependencies
+using `conda env create -f environment.yml`.
+
 ## Quality control
 
 The logic of QC is that all the scripts starting by 3 are
@@ -28,6 +31,6 @@ were kept and which ones were rejected.
 
 Slice timing information is missing in Memento, so we need
 to guess it, using the lag between odd and even slices, and
-the cati_monito file which maps scans to machines.
+the `cati_monito` file which maps scans to machines.
 Scripts 5, 6 and 7 handle slice timing inference
 and generation.
