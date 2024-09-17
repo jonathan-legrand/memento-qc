@@ -12,6 +12,8 @@ jupyter-like cells, hence the `# %%` tags.
 Scripts starting with 01, 02, 04 and 05 are able to write to BIDS directory,
 make sure you understand what they do before executing them.
 
+## Quality control
+
 The logic of QC is that all the scripts starting by 3 are
 able to detect bad scans. The ones that cannot be repaired
 are excluded from the preprocessing using the renamer 
@@ -21,3 +23,11 @@ columns as an input and adds the `acq-rejected` flag to their bids name. These s
 The document `IRMf dans Memento - rapport d'avancement.pdf`
 reports the choices that have been made regarding which scans
 were kept and which ones were rejected.
+
+## Slice timing
+
+Slice timing information is missing in Memento, so we need
+to guess it, using the lag between odd and even slices, and
+the cati_monito file which maps scans to machines.
+Scripts 5, 6 and 7 handle slice timing inference
+and generation.
