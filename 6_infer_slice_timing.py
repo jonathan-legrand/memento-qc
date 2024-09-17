@@ -48,9 +48,8 @@ plt.show()
 # We load the cati_monito file, which contains 
 # information on which machine was used for each
 # scan
-# TODO Store monito in a smart place
 
-monito = pd.read_csv("/bigdata/jlegrand/data/Memento/cati_monito_2.txt", sep="\t")
+monito = pd.read_csv("/georges/memento/BIDS/cati_monito_2.txt", sep="\t")
 monito["short_id"] = monito.loc[:, "NUM_ID"].map(lambda x: x[4:])
 
 mm = monito.melt(
