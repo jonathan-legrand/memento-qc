@@ -1,6 +1,7 @@
 """
-Use an outlier detection algorithm on Image Quality Metrics
-computed by mriqc to detect bad scans
+Use an outlier detection algorithm on Image Quality Metrics (IQM)
+computed by mriqc to detect bad scans. The SLURM commands used
+to generate IQM are stored in participants_mriqc.slurm
 """
 # %%
 import pandas as pd
