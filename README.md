@@ -9,7 +9,7 @@ and performing automated QC.
 Most of the scripts were run using vscode's extension for
 jupyter-like cells, hence the `# %%` tags.
 
-Scripts starting with 01, 02, 04 and 05 are able to write to BIDS directory,
+Scripts starting with 1, 2, 4 and 7 are able to write to BIDS directory,
 make sure you understand what they do before executing them.
 
 ## Quality control
