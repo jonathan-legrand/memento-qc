@@ -14,6 +14,9 @@ make sure you understand what they do before executing them.
 
 To get started, create a conda environment with proper dependencies
 using `conda env create -f environment.yml`.
+You may also need to create a directlory named `output`
+at the root of the project, that will be used by scripts
+to export csv files and pdf reports.
 
 ## Quality control
 
