@@ -1,6 +1,6 @@
 """
 This script bidsifies the content of the INPUT_DIR,
-which should use the memento weird convention,
+which should use the memento convention,
 and put it in the BIDS_DIR.
 """
 
